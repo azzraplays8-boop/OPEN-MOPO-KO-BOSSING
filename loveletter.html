@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Love Letter 💌</title>
+
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+    color: white;
+    position: relative;
+}
+
+/* Container for the letter */
+.container {
+    background: rgba(255,255,255,0.15);
+    padding: 40px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 30px rgba(0,0,0,0.2);
+    max-width: 700px;
+    text-align: left;
+    overflow-y: auto;
+    max-height: 90vh;
+    position: relative;
+    z-index: 1;
+}
+
+/* Title */
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Letter text */
+p {
+    line-height: 1.8;
+    font-size: 1.15em;
+    margin-bottom: 20px;
+}
+
+/* Buttons */
+button {
+    display: block;
+    margin: 25px auto 0 auto;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    background: white;
+    color: #ff4b7d;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #ff4b7d;
+    color: white;
+}
+
+/* Floating hearts inside container */
+.heart {
+    position: absolute;
+    font-size: 20px;
+    animation: floatUp 6s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes floatUp {
+    from { transform: translateY(0); opacity: 1; }
+    to   { transform: translateY(-120%); opacity: 0; }
+}
+
+/* Sparkles / glow effect */
+.sparkle {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: sparkleAnim 3s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes sparkleAnim {
+    0% { transform: translateY(0) scale(1); opacity: 0.8; }
+    50% { transform: translateY(-50px) scale(1.5); opacity: 0.4; }
+    100% { transform: translateY(-100px) scale(1); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>💌 My Love Letter</h1>
+
+    <!-- Typing letter -->
+    <p id="letterText"></p>
+
+    <button onclick="goBack()">⬅ Back</button>
+</div>
+
+<script>
+// ===== Typing Letter Animation =====
+const letter = `My love, my beautiful Mariel,
+
+From the moment you came into my life, everything changed for the better. The world suddenly felt brighter, warmer, and more meaningful. Every smile you give, every laugh we share, and every quiet moment together becomes a memory I hold close to my heart. You have a way of making ordinary days feel extraordinary, and I am forever grateful for your presence in my life.
+
+I know that sometimes I falter and make mistakes, and I have my own shortcomings as your boyfriend. But I want you to know that I am always learning, growing, and striving to be better for you. I want to love you in a way that makes you feel cherished, supported, and deeply special because that is exactly what you are to me. My heart belongs to you, and you are the only one I want to share my dreams, my future, and my life with.
+
+Every day with you teaches me the meaning of patience, kindness, and unconditional love. Your laughter is my favorite sound, your smile my favorite sight, and your happiness my ultimate goal. I promise to always listen, to always care, and to always fight for us, even when life throws challenges our way.
+
+You are not just my girlfriend, you are my best friend, my confidante, my comfort, and my home. With you, I feel safe, loved, and understood in ways I never knew were possible. Your love inspires me to be the best version of myself, and I cannot imagine my life without you by my side.
+
+I promise to support you in every dream, respect you in every decision, and love you more deeply with each passing day. No matter where life takes us, no matter how far we go or what challenges we face, my heart will always choose you. You are my forever, my everything, and the love I will cherish eternally.
+
+Forever yours,
+❤️ Your Love Ronel`;
+
+let idx = 0;
+const letterElement = document.getElementById("letterText");
+
+function typeLetter() {
+    if (idx < letter.length) {
+        letterElement.innerHTML += letter.charAt(idx) === "\n" ? "<br>" : letter.charAt(idx);
+        idx++;
+        setTimeout(typeLetter, 35);
+    }
+}
+typeLetter();
+
+// ===== Floating hearts inside container =====
+setInterval(() => {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "💖";
+    heart.style.left = Math.random() * 650 + "px";
+    heart.style.top = Math.random() * 600 + "px";
+    heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+    document.querySelector(".container").appendChild(heart);
+
+    setTimeout(() => heart.remove(), 6000);
+}, 500);
+
+// ===== Background sparkles =====
+setInterval(() => {
+    const sparkle = document.createElement("div");
+    sparkle.classList.add("sparkle");
+    sparkle.style.left = Math.random() * window.innerWidth + "px";
+    sparkle.style.top = Math.random() * window.innerHeight + "px";
+    sparkle.style.width = 3 + Math.random() * 4 + "px";
+    sparkle.style.height = sparkle.style.width;
+    sparkle.style.opacity = 0.5 + Math.random() * 0.5;
+    document.body.appendChild(sparkle);
+
+    setTimeout(() => sparkle.remove(), 3000);
+}, 400);
+
+// ===== Back Button =====
+function goBack() {
+    window.location.href = "valentine.html";
+}
+</script>
+
+</body>
+</html>
